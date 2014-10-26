@@ -80,4 +80,24 @@ public class InterviewServiceTest
 		testedService.permutationRecursive("", "ABCD");
 	}
 	// :~)
+
+	/**
+	 * Find first non repeating char in the string
+	 */
+	@Test(dataProvider="FirstNonRepeatedChar")
+	public void firstNonRepeatedChar(String sampleInput, char expected)
+	{
+		Assert.assertEquals(testedService.firstNonRepeatedCharOnePass(sampleInput), expected);
+
+		Assert.assertEquals(testedService.firstNonRepeatedCharTwoPass(sampleInput), expected);
+	}
+	@DataProvider(name="FirstNonRepeatedChar")
+	private Object[][] getFirstNonRepeatedChar()
+	{
+		return new Object[][] {
+			{ "abcdefghija", 'b' },
+			{ "aaa", ' ' },
+		};
+	}
+	// :~)
 }

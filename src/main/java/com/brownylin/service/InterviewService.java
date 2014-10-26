@@ -1,8 +1,11 @@
 package com.brownylin.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
 
@@ -135,6 +138,49 @@ public class InterviewService
 				permutationRecursive(prefix + input.charAt(i), input.substring(0, i) + input.substring(i + 1));
 			}
 		}
+	}
+	// :~)
+
+	/**
+	 * Find first non repeating char in the string
+	 */
+	public char firstNonRepeatedCharOnePass(String word)
+	{
+		Set<Character> repeating = new HashSet<>();
+		List<Character> nonRepeating = new ArrayList<>();
+
+		for (int i = 0; i < word.length(); i++) {
+			char letter = word.charAt(i);
+			if (repeating.contains(letter)) {
+				continue;
+			}
+
+			if (nonRepeating.contains(letter)) {
+				nonRepeating.remove((Character) letter);
+				repeating.add(letter);
+			} else {
+				nonRepeating.add(letter);
+			}
+		}
+
+		return nonRepeating.size() > 0 ? nonRepeating.get(0) : ' ';
+	}
+
+	public char firstNonRepeatedCharTwoPass(String str)
+	{
+		Map<Character,Integer> counts = new LinkedHashMap<>(str.length());
+
+		for (char c : str.toCharArray()) {
+			counts.put(c, counts.containsKey(c) ? counts.get(c) + 1 : 1);
+		}
+
+		for (Map.Entry<Character,Integer> entry : counts.entrySet()) {
+			if (entry.getValue() == 1) {
+				return entry.getKey();
+			}
+		}
+
+		return ' ';
 	}
 	// :~)
 }
