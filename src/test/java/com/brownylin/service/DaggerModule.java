@@ -1,5 +1,6 @@
 package com.brownylin.service;
 
+import com.brownylin.leetcode.ArrayProcessing;
 import com.brownylin.leetcode.DynamicProgramming;
 import com.brownylin.leetcode.StringProcessing;
 import dagger.Module;
@@ -7,10 +8,11 @@ import dagger.ObjectGraph;
 
 @Module(
 	injects = {
-		JodaTimeService.class,
+		ArrayProcessing.class,
+		DynamicProgramming.class,
 		InterviewService.class,
-		StringProcessing.class,
-		DynamicProgramming.class
+		JodaTimeService.class,
+		StringProcessing.class
 	}
 )
 public class DaggerModule
@@ -20,5 +22,4 @@ public class DaggerModule
 	public static ObjectGraph getObjectGraph() {
 		return objectGraph;
 	}
-
 }

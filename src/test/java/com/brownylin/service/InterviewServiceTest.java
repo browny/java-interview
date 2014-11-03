@@ -100,4 +100,24 @@ public class InterviewServiceTest
 		};
 	}
 	// :~)
+
+	/**
+	 * Check if the string is palindrome
+	 */
+	@Test(dataProvider="IsPalindrome")
+	public void isPalindrome(String s, boolean expected)
+	{
+		boolean result = testedService.isPalindrome(s);
+
+		Assert.assertEquals(result, expected);
+	}
+	@DataProvider(name="IsPalindrome")
+	private Object[][] getIsPalindrome()
+	{
+		return new Object[][] {
+			{ "Niagara. O roar again!", true },
+			{ "RACECAR", true },
+		};
+	}
+	// :~)
 }

@@ -1,6 +1,8 @@
 package com.brownylin.leetcode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 
@@ -77,6 +79,42 @@ public class DynamicProgramming
 		map2.put(n, total);
 
 		return map2.get(n);
+	}
+	// :~)
+
+	/**
+	 * Minimum Path Sum
+	 * https://oj.leetcode.com/problems/minimum-path-sum/
+	 */
+	static int[][] mps;
+	public int minPathSum(int[][] grid)
+	{
+		if (grid==null || grid.length==0){
+			return 0;
+		}
+
+		int[][] minCounter=new int[grid.length][grid[0].length];
+
+		minCounter[0][0]=grid[0][0];
+
+		// build first column
+		for  (int i=1; i<grid.length; i++){
+			minCounter[i][0]=grid[i][0]+minCounter[i-1][0];
+		}
+
+		// build first row
+		for (int i=1; i<grid[0].length; i++){
+			minCounter[0][i]=grid[0][i]+minCounter[0][i-1];
+		}
+
+		//build minCounter
+		for (int i=1; i<grid.length; i++){
+			for (int j=1; j<grid[0].length; j++){
+				minCounter[i][j]=Math.min(minCounter[i-1][j], minCounter[i][j-1])+grid[i][j];
+			}
+		}
+
+		return minCounter[grid.length-1][grid[0].length-1];
 	}
 	// :~)
 }

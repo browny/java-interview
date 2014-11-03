@@ -183,4 +183,28 @@ public class InterviewService
 		return ' ';
 	}
 	// :~)
+
+	/**
+	 * Check if the string is palindrome
+	 */
+	public boolean isPalindrome(String s)
+	{
+		if (s.isEmpty())
+			return true;
+
+		// Converts string to lowercase and replaces everything except numbers and alphabets
+		s = s.toLowerCase().replaceAll("\\W", "");
+
+		int j = 0;
+		int k = s.length() - 1;
+
+		while(j < s.length() / 2) {
+			if (s.charAt(j++) != s.charAt(k--)){
+				return false;
+			}
+		}
+
+		return true;
+	}
+	// :~)
 }
