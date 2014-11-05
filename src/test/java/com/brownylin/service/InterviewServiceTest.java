@@ -1,5 +1,13 @@
 package com.brownylin.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -18,8 +26,6 @@ public class InterviewServiceTest
 	@Test(dataProvider="ReverseString")
 	public void reverseString(String sampleInput, String expected)
 	{
-		logger.info("input: {}, result: {}", sampleInput, testedService.reverseString(sampleInput));
-
 		Assert.assertEquals(testedService.reverseString(sampleInput), expected);
 		Assert.assertEquals(testedService.reverseStringIterative(sampleInput), expected);
 		Assert.assertEquals(testedService.reverseStringRecursive(sampleInput), expected);
@@ -39,8 +45,6 @@ public class InterviewServiceTest
 	@Test(dataProvider="ReverseWords")
 	public void reverseWords(String sampleInput, String expected)
 	{
-		logger.info("input: {}, result: {}", sampleInput, testedService.reverseWords(sampleInput));
-
 		Assert.assertEquals(testedService.reverseWords(sampleInput), expected);
 	}
 	@DataProvider(name="ReverseWords")
@@ -77,7 +81,7 @@ public class InterviewServiceTest
 	@Test
 	public void permutationRecursive()
 	{
-		testedService.permutationRecursive("", "ABCD");
+		testedService.permutationRecursive("", "012");
 	}
 	// :~)
 
@@ -118,6 +122,18 @@ public class InterviewServiceTest
 			{ "Niagara. O roar again!", true },
 			{ "RACECAR", true },
 		};
+	}
+	// :~)
+
+	/**
+	 * Check if the string is palindrome
+	 */
+	@Test
+	public void generatePerm()
+	{
+		List<Integer> list = Arrays.asList(1, 2 ,3, 4);
+
+		testedService.generatePerm(list, 0, 3);
 	}
 	// :~)
 }

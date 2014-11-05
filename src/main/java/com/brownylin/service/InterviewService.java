@@ -1,12 +1,6 @@
 package com.brownylin.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -17,7 +11,9 @@ public class InterviewService
 	private static final Logger logger = LoggerFactory.getLogger(InterviewService.class);
 
 	@Inject
-	public InterviewService() {}
+	public InterviewService()
+	{
+	}
 
 	/**
 	 * Reverse String
@@ -58,7 +54,7 @@ public class InterviewService
 		String arr[] = source.split(" ");
 		StringBuilder stb = new StringBuilder();
 
-		for(int i = arr.length-1; i >= 0; i--) {
+		for (int i = arr.length - 1; i >= 0; i--) {
 			if (i == 0) {
 				stb.append(arr[i]);
 			} else {
@@ -95,7 +91,7 @@ public class InterviewService
 		List inputList = Arrays.asList(input);
 		Set inputSet = new HashSet(inputList);
 
-		if(inputSet.size() < inputList.size())
+		if (inputSet.size() < inputList.size())
 			return true;
 
 		return false;
@@ -124,17 +120,11 @@ public class InterviewService
 	 */
 	public void permutationRecursive(String prefix, String input)
 	{
-		logger.info("prefix: {}, input: {}", prefix, input);
-
 		int n = input.length();
 		if (n == 0) {
 			System.out.println(prefix);
 		} else {
 			for (int i = 0; i < n; i++) {
-				logger.info(
-					"prefix: {} + input.charAt({}): {}, input.substring(0, {}): {} + input.substring({} + 1): {}",
-					prefix, i, input.charAt(i), i, input.substring(0, i), i, input.substring(i + 1)
-				);
 				permutationRecursive(prefix + input.charAt(i), input.substring(0, i) + input.substring(i + 1));
 			}
 		}
@@ -168,13 +158,13 @@ public class InterviewService
 
 	public char firstNonRepeatedCharTwoPass(String str)
 	{
-		Map<Character,Integer> counts = new LinkedHashMap<>(str.length());
+		Map<Character, Integer> counts = new LinkedHashMap<>(str.length());
 
 		for (char c : str.toCharArray()) {
 			counts.put(c, counts.containsKey(c) ? counts.get(c) + 1 : 1);
 		}
 
-		for (Map.Entry<Character,Integer> entry : counts.entrySet()) {
+		for (Map.Entry<Character, Integer> entry : counts.entrySet()) {
 			if (entry.getValue() == 1) {
 				return entry.getKey();
 			}
@@ -198,8 +188,8 @@ public class InterviewService
 		int j = 0;
 		int k = s.length() - 1;
 
-		while(j < s.length() / 2) {
-			if (s.charAt(j++) != s.charAt(k--)){
+		while (j < s.length() / 2) {
+			if (s.charAt(j++) != s.charAt(k--)) {
 				return false;
 			}
 		}
@@ -207,4 +197,23 @@ public class InterviewService
 		return true;
 	}
 	// :~)
+
+	/**
+	 * Generate all possible permutation of the integer list
+	 */
+	public void generatePerm(List<Integer> input, int start, int end)
+	{
+		if (start > end) {
+			logger.info("result: {}", input);
+		} else {
+			for (int i = start; i <= end; i++) {
+				logger.info("input: {}, start: {}, i: {}", input, start, i);
+				Collections.swap(input, start, i);
+				generatePerm(input, start + 1, end);
+				Collections.swap(input, start, i);
+			}
+		}
+	}
+	// :~)
 }
+
