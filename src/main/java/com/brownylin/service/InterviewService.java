@@ -200,6 +200,20 @@ public class InterviewService
 
 	/**
 	 * Generate all possible permutation of the integer list
+	 * 每個都跟第一個換
+	 *
+	 * 1 2 3 4
+	 *   3 2 4
+	 *   4 3 2
+	 *
+	 * 2 1 3 4
+	 *   3 1 4
+	 *   4 3 1
+	 *
+	 * 3 2 1 4
+	 *
+	 *
+	 * 4 2 3 1
 	 */
 	public void generatePerm(List<Integer> input, int start, int end)
 	{
