@@ -4,6 +4,7 @@ import com.brownylin.leetcode.ArrayProcessing;
 import com.brownylin.leetcode.BackTracking;
 import com.brownylin.leetcode.DynamicProgramming;
 import com.brownylin.leetcode.StringProcessing;
+import com.brownylin.practice.CollectionPractice;
 import dagger.Module;
 import dagger.ObjectGraph;
 
@@ -11,6 +12,7 @@ import dagger.ObjectGraph;
 	injects = {
 		ArrayProcessing.class,
 		BackTracking.class,
+		CollectionPractice.class,
 		DynamicProgramming.class,
 		InterviewService.class,
 		JodaTimeService.class,
