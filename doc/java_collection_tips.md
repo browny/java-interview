@@ -13,6 +13,7 @@ while one thread is Iterating over it because they work on clone of Collection i
     * 5) **Legacy**: There is nothing about `Vector` which List collection cannot do. Therefore Vector should be avoided. If there is a need of thread-safe operation, use `CopyOnWriteArrayList` which is a **thread-safe** variant of `ArrayList`
     
 3. Use`ArrayDeque` implements **Stack** and **Queue**
+    
     [http://www.shaunabram.com/stacks-and-queues-in-java/]()
     
 4. `ArrayList` vs. `LinkedList`
@@ -23,10 +24,28 @@ while one thread is Iterating over it because they work on clone of Collection i
 
     `ArrayList<E>`, on the other hand, allow fast random read access, so you can grab any element in constant time. But **adding or removing from anywhere but the end requires shifting all the latter elements over**, either to make an opening or fill the gap. Also, if you add more elements than the capacity of the underlying array, a new array (1.5 times the size) is allocated, and the old array is copied to the new one, so adding to an ArrayList is O(n) in the worst case but constant on average.
 
-![image](http://www.codejava.net/images/articles/javacore/collections/List%20API%20class%20diagram.png)
+    ![image](http://www.codejava.net/images/articles/javacore/collections/List%20API%20class%20diagram.png)
 
 5. `HashSet`, `TreeSet` and `LinkedHashSet`
 
     In brief, if you need a fast set, you should use `HashSet` (Implemented using a hash table); if you need a sorted set, then `TreeSet`(implemented using a red-black tree) should be used; if you need a set that can be store the insertion order, `LinkedHashSet` (implemented as a hash table with a linked list running through it) should be used.
 
-![image](http://www.codejava.net/images/articles/javacore/collections/Set%20API%20class%20diagram.png)
+    ![image](http://www.codejava.net/images/articles/javacore/collections/Set%20API%20class%20diagram.png)
+
+6. `HashMap`, `LinkedHashMap` and `TreeMap`
+
+    * `HashMap` makes absolutely no guarantees about the iteration order. It can (and will) even change completely when new elements are added.
+    * `TreeMap` will iterate according to the "natural ordering" of the keys according to their `compareTo()` method (or an externally supplied Comparator). Additionally, it implements the SortedMap interface, which contains methods that depend on this sort order.
+    * `LinkedHashMap` will iterate in the order in which the entries were put into the map
+
+    ![image](http://www.codejava.net/images/articles/javacore/collections/Map%20API%20class%20diagram.png)
+
+7.  `ArrayBlockingQueue`, `ConcurrentLinkedQueue`, `LinkedBlockingQueue` and/or `LinkedList`
+
+    * `ConcurrentLinkedQueue` is an appropriate choice when many threads will share access to a common collection. This queue does not permit null elements.
+    * `ArrayBlockingQueue` is a classic "bounded buffer", in which a fixed-sized array holds elements inserted by producers and extracted by consumers. This class supports an optional fairness policy for ordering waiting producer and consumer threads
+    * `LinkedBlockingQueue` typically have higher throughput than array-based queues but less predictable performance in most concurrent applications.
+    
+    Basically the difference between them are performance characteristics and blocking behavior.
+ 
+   ![image](http://www.codejava.net/images/articles/javacore/collections/Queue%20API%20class%20diagram.png) 
